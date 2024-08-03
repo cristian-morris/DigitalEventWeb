@@ -1,0 +1,113 @@
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .profile-header {
+    text-align: center;
+  }
+  
+  .profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .social-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .profile-info, .events-section, .settings-section {
+    margin: 20px 0;
+  }
+  
+  .event-item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  /* Profile.css */
+
+.profile-container {
+    padding: 20px;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-photo {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  
+  .edit-button {
+    margin-top: 10px;
+  }
+  
+  .profile-info {
+    margin-top: 20px;
+  }
+  
+  .events-section {
+    margin-top: 20px;
+  }
+  
+  .event-item {
+    margin-bottom: 20px;
+  }
+  
+  .event-image {
+    width: 100px;
+    height: 100px;
+  }
+  .edit-button {
+    background-color: #800080; /* Color morado */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+  
+  .edit-button:hover {
+    background-color: #6a006a; /* Un tono más oscuro de morado para el hover */
+  }
+  /* Profile.css */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegúrate de que esté por encima del resto del contenido */
+}
