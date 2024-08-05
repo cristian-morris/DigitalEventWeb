@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { registerUser } from "../../api";
+import Swal from "sweetalert";
 import "./Register.css";
 
 const Register = () => {
@@ -21,13 +22,35 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Check if all fields are filled
+    const { nombre, email, contrasena, telefono, last_name } = formData;
+    if (!nombre || !email || !contrasena || !telefono || !last_name) {
+      Swal({
+        title: "Campos incompletos",
+        text: "Por favor, complete todos los campos antes de continuar.",
+        icon: "warning",
+        button: "Entendido",
+      });
+      return;
+    }
     try {
       await registerUser(formData);
-      alert("Registro exitoso");
-      window.location.href = "/login"; // Redirect to login after registration
+      Swal({
+        title: "Registro exitoso",
+        text: "Su cuenta ha sido creada exitosamente.",
+        icon: "success",
+        button: "Aceptar",
+      }).then(() => {
+        window.location.href = "/login"; // Redirect to login after registration
+      });
     } catch (error) {
       console.error("Error al registrarse", error);
-      alert("Error al registrarse");
+      Swal({
+        title: "Error",
+        text: "Hubo un problema al registrarse. Por favor, intente nuevamente.",
+        icon: "error",
+        button: "Aceptar",
+      });
     }
   };
 
@@ -38,7 +61,7 @@ const Register = () => {
       </div>
       <div className="container">
         <h2>Crea una cuenta</h2>
-        <div className="subtext">Es rápido y facil</div>
+        <div className="subtext">Es rápido y fácil</div>
         <form onSubmit={handleSubmit}>
           <div className="form-row horizontal">
             <div className="form-group">
@@ -47,7 +70,6 @@ const Register = () => {
                 value={formData.nombre}
                 onChange={handleChange}
                 placeholder="Nombre"
-                required
               />
             </div>
             <div className="form-group">
@@ -56,7 +78,6 @@ const Register = () => {
                 value={formData.last_name}
                 onChange={handleChange}
                 placeholder="Apellido"
-                required
               />
             </div>
           </div>
@@ -67,7 +88,6 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Correo Electrónico"
-              required
             />
           </div>
           <div className="form-group">
@@ -77,7 +97,6 @@ const Register = () => {
               value={formData.contrasena}
               onChange={handleChange}
               placeholder="Contraseña"
-              required
             />
           </div>
           <div className="form-row horizontal">
@@ -87,7 +106,6 @@ const Register = () => {
                 value={formData.telefono}
                 onChange={handleChange}
                 placeholder="Teléfono"
-                required
               />
             </div>
             <div className="form-group">
@@ -95,7 +113,6 @@ const Register = () => {
                 name="rol_id"
                 value={formData.rol_id}
                 onChange={handleChange}
-                required
               >
                 <option value="2">Usuario</option>
                 <option value="3">Organizador</option>
