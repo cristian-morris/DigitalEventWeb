@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../api";
+import Swal from "sweetalert";
 import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Check if email and password are filled
+    if (!email || !contrasena) {
+      Swal({
+        title: "Campos incompletos",
+        text: "Por favor, complete todos los campos antes de continuar.",
+        icon: "warning",
+        button: "Entendido",
+      });
+      return;
+    }
     try {
       const { token, user } = await loginUser(email, contrasena);
       localStorage.setItem("token", token);
@@ -31,7 +41,12 @@ const Login = () => {
           break;
       }
     } catch (error) {
-      setError("Error al iniciar sesión");
+      Swal({
+        title: "Error",
+        text: "Error al iniciar sesión. Por favor, verifique sus credenciales.",
+        icon: "error",
+        button: "Aceptar",
+      });
       console.error("Error al iniciar sesión", error);
     }
   };
@@ -61,7 +76,6 @@ const Login = () => {
             />
           </div>
           <button type="submit">Iniciar Sesión</button>
-          {error && <p className="error-message">{error}</p>}
         </form>
         <p>
           ¿No tienes cuenta? <a href="/register">Regístrate</a>
