@@ -1,16 +1,41 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Profile from './Profile'; // Asegúrate de que esto coincide con el nombre del archivo
-import EditProfile from './EditProfile';
-import './App.css'; // O cualquier archivo de estilos que estés usando
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import UserDashboard from "./components/dashboards/UserDashboard";
+import AdminDashboard from "./components/dashboards/AdminDashboard";
+import Profile from "./Profile"; // Asegúrate de que esto coincide con el nombre del archivo
+import "./App.css"; // O cualquier archivo de estilos que estés usando
+
+const PrivateRoute = ({ element, ...rest }) => {
+  const token = localStorage.getItem("token");
+  return token ? element : <Navigate to="/login" />;
+};
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/" element={<Profile />} /> {/* Redirige a perfil como predeterminado */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/user"
+          element={<PrivateRoute element={<UserDashboard />} />}
+        />
+        <Route
+          path="/organizer"
+          element={<PrivateRoute element={<Profile />} />}
+        />
+        <Route
+          path="/admin"
+          element={<PrivateRoute element={<AdminDashboard />} />}
+        />
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );
