@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import swal from "sweetalert";
 import { registerUser } from "../../api";
-import Swal from "sweetalert";
 import "./Register.css";
 
 const Register = () => {
@@ -22,35 +22,23 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Check if all fields are filled
+
+    // Verificar si algún campo está vacío
     const { nombre, email, contrasena, telefono, last_name } = formData;
     if (!nombre || !email || !contrasena || !telefono || !last_name) {
-      Swal({
-        title: "Campos incompletos",
-        text: "Por favor, complete todos los campos antes de continuar.",
-        icon: "warning",
-        button: "Entendido",
-      });
+      swal("Error", "Por favor, rellena todos los campos.", "error");
       return;
     }
+
     try {
       await registerUser(formData);
-      Swal({
-        title: "Registro exitoso",
-        text: "Su cuenta ha sido creada exitosamente.",
-        icon: "success",
-        button: "Aceptar",
-      }).then(() => {
-        window.location.href = "/login"; // Redirect to login after registration
-      });
+      swal("Registro exitoso", "Tu cuenta ha sido creada con éxito", "success")
+        .then(() => {
+          window.location.href = "/login"; // Redirect to login after registration
+        });
     } catch (error) {
       console.error("Error al registrarse", error);
-      Swal({
-        title: "Error",
-        text: "Hubo un problema al registrarse. Por favor, intente nuevamente.",
-        icon: "error",
-        button: "Aceptar",
-      });
+      swal("Error al registrarse", "Hubo un problema al crear tu cuenta", "error");
     }
   };
 
@@ -62,7 +50,7 @@ const Register = () => {
       <div className="container">
         <h2>Crea una cuenta</h2>
         <div className="subtext">Es rápido y fácil</div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="form-row horizontal">
             <div className="form-group">
               <input
