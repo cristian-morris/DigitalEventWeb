@@ -10,6 +10,7 @@ import Register from "./components/auth/Register";
 import UserDashboard from "./components/dashboards/UserDashboard";
 import AdminDashboard from "./components/dashboards/AdminDashboard";
 import Profile from "./Profile"; // Asegúrate de que esto coincide con el nombre del archivo
+import ResetPassword from "./components/auth/ResetPassword"; // Importar el componente
 import "./App.css"; // O cualquier archivo de estilos que estés usando
 
 const PrivateRoute = ({ element, ...rest }) => {
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} /> {/* Añadir la nueva ruta */}
         <Route
           path="/user"
           element={<PrivateRoute element={<UserDashboard />} />}
