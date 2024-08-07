@@ -10,6 +10,7 @@ import Register from "./components/auth/Register";
 import UserDashboard from "./components/dashboards/UserDashboard";
 import AdminDashboard from "./components/dashboards/AdminDashboard";
 import Profile from "./Profile"; // Asegúrate de que esto coincide con el nombre del archivo
+import EditProfile from "./EditProfile"; // Importa el componente EditProfile
 import ResetPassword from "./components/auth/ResetPassword"; // Importar el componente
 import "./App.css"; // O cualquier archivo de estilos que estés usando
 
@@ -32,6 +33,10 @@ function App() {
         <Route
           path="/organizer"
           element={<PrivateRoute element={<Profile />} />}
+        />
+        <Route
+          path="/edit-profile"
+          element={<PrivateRoute element={<EditProfile />} />}
         />
         <Route
           path="/admin"
