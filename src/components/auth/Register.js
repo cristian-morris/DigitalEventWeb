@@ -69,7 +69,7 @@ const Register = () => {
               />
             </div>
           </div>
-          <div className="form-group">
+          <div className="form-group wide-input">
             <input
               name="email"
               type="email"
@@ -78,7 +78,7 @@ const Register = () => {
               placeholder="Correo Electrónico"
             />
           </div>
-          <div className="form-group">
+          <div className="form-group wide-input">
             <input
               name="contrasena"
               type="password"
