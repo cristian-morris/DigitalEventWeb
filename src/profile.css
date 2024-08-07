@@ -85,7 +85,7 @@
     height: 100px;
   }
   .edit-button {
-    background-color: #800080; /* Color morado */
+    background-color: #b370b0; /* Color morado */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -96,7 +96,7 @@
   }
   
   .edit-button:hover {
-    background-color: #6a006a; /* Un tono más oscuro de morado para el hover */
+    background-color: #b370b0; /* Un tono más oscuro de morado para el hover */
   }
   /* Profile.css */
 .loading-overlay {
@@ -110,4 +110,18 @@
   justify-content: center;
   align-items: center;
   z-index: 1000; /* Asegúrate de que esté por encima del resto del contenido */
+}
+.logout-button {
+  background-color:#b370b0 ; /* Cambia el color de fondo a morado */
+  color: white; /* Cambia el color del texto a blanco */
+  border: none; /* Elimina cualquier borde */
+  padding: 10px 20px; /* Ajusta el padding */
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
+  cursor: pointer; /* Cambia el cursor a puntero al pasar sobre el botón */
+  border-radius: 5px; /* Añade bordes redondeados */
+  transition: background-color 0.3s ease; /* Añade una transición suave para el cambio de color */
+}
+
+.logout-button:hover {
+  background-color: #b370b0; /* Cambia el color al pasar el cursor */
 }
