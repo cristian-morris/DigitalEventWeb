@@ -36,7 +36,7 @@
   }
   
   .back-button {
-    background-color: #6f42c1; /* Color de fondo del botón */
+    background-color: #800080; /* Color de fondo del botón */
     color: white; /* Color del texto del botón */
     border: none; /* Sin borde */
     padding: 10px 20px; /* Relleno del botón */
@@ -46,7 +46,7 @@
   }
   
   .save-button {
-    background-color: #6f42c1; /* Color de fondo del botón */
+    background-color: #800080; /* Color de fondo del botón */
     color: white; /* Color del texto del botón */
     border: none; /* Sin borde */
     padding: 6px 12px; /* Relleno del botón */
@@ -61,11 +61,130 @@
     opacity: 0.9; /* Opacidad para hacer que el botón se vea más oscuro al pasar el cursor */
   }
   .back-button:hover {
-    background-color:#5a32a3 ; /* Cambia a un color azul más oscuro */
+    background-color:#800080; /* Cambia a un color azul más oscuro */
   }
   
   .save-button:hover {
-    background-color: #5a32a3; /* Cambia a un color morado más oscuro */
+    background-color: #800080; /* Cambia a un color morado más oscuro */
   }
  
-  
+  /* EditProfile.css */
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.show-password-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.purple-button {
+  background-color: #800080;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.purple-button:hover {
+  background-color: #800080; /* Un morado más oscuro para el hover */
+}
+/* EditProfile.css */
+
+.edit-profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 30px; /* Deja espacio para el ícono */
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #000; /* Color del ícono */
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-button {
+  background-color: #b370b0; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Relleno del botón */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor tipo mano para indicar que es un botón */
+  font-size: 14px; /* Tamaño de fuente */
+}
+
+.save-button {
+  background-color: #b370b0; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  padding: 6px 12px; /* Relleno del botón */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor tipo mano para indicar que es un botón */
+  font-size: 12px; /* Tamaño de fuente */
+}
+
+/* Estilos para cuando el usuario coloca el cursor sobre el botón */
+.back-button:hover,
+.save-button:hover {
+  opacity: 0.9; /* Opacidad para hacer que el botón se vea más oscuro al pasar el cursor */
+}
+
+.back-button:hover {
+  background-color:#b370b0; /* Cambia a un color azul más oscuro */
+}
+
+.save-button:hover {
+  background-color: #b370b0; /* Cambia a un color morado más oscuro */
+}
