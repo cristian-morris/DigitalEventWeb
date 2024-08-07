@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import './profile.css'; // Si el archivo se llama 'profile.css'
-
+import './profile.css'; // Asegúrate de que el nombre del archivo coincida
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -12,11 +11,24 @@ const Profile = () => {
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [errorProfile, setErrorProfile] = useState(null);
   const [errorEvents, setErrorEvents] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se encontró el usuario. Por favor, inicie sesión nuevamente.',
+        icon: 'error',
+        button: 'Aceptar',
+      });
+      navigate('/login');
+      return;
+    }
+
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('https://api-digitalevent.onrender.com/api/users/2');
+        const response = await axios.get(`https://api-digitalevent.onrender.com/api/users/${user.usuario_id}`);
         setProfileData(response.data);
         setLoadingProfile(false);
       } catch (error) {
@@ -46,7 +58,7 @@ const Profile = () => {
 
     fetchProfileData();
     fetchEventsData();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (!loadingProfile && !loadingEvents) {
@@ -65,14 +77,18 @@ const Profile = () => {
   const currentDate = new Date();
   const proximosEventos = eventsData.filter(evento => new Date(evento.fecha_inicio) >= currentDate);
 
-  // Verifica que profileData no sea null antes de intentar acceder a sus propiedades
   if (loadingProfile || loadingEvents) {
-    return null; // No muestra nada mientras se está cargando
+    return null;
   }
 
   if (!profileData) {
-    return null; // O puedes mostrar un mensaje más amigable aquí si prefieres
+    return null;
   }
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
 
   return (
     <div className="profile-container">
@@ -107,6 +123,8 @@ const Profile = () => {
           <p>No hay eventos.</p>
         )}
       </div>
+      <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
+
     </div>
   );
 };
