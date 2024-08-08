@@ -31,10 +31,10 @@ const Login = () => {
           navigate("/admin");
           break;
         case 2:
-          navigate("/user");
+          navigate("/organizer");
           break;
         case 3:
-          navigate("/organizer");
+          navigate("/client");
           break;
         default:
           navigate("/");
