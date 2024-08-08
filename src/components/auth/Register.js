@@ -10,7 +10,7 @@ const Register = () => {
     contrasena: "",
     telefono: "",
     last_name: "",
-    rol_id: "3", // Default to 'Cliente'
+    rol_id: "2", // Default to 'User'
     curp: "",
     empresa: "",
     rfc: "",
@@ -27,10 +27,7 @@ const Register = () => {
     e.preventDefault();
 
     const { nombre, email, contrasena, telefono, last_name, rol_id, curp, empresa, rfc } = formData;
-    
-    // Validación según el rol
-    if (!nombre || !email || !contrasena || !telefono || !last_name || 
-        (rol_id === "2" && (!curp || !empresa || !rfc))) {
+    if (!nombre || !email || !contrasena || !telefono || !last_name || (rol_id === "3" && (!curp || !empresa || !rfc))) {
       swal("Error", "Por favor, rellena todos los campos.", "error");
       return;
     }
@@ -38,8 +35,8 @@ const Register = () => {
     try {
       await registerUser({ nombre, email, contrasena, telefono, last_name, rol_id });
       
-      // Guardar los datos adicionales en localStorage si es Organizador
-      if (rol_id === "2") {
+      // Guardar los datos adicionales en localStorage si es organizador
+      if (rol_id === "3") {
         localStorage.setItem("curp", curp);
         localStorage.setItem("empresa", empresa);
         localStorage.setItem("rfc", rfc);
@@ -115,13 +112,12 @@ const Register = () => {
                 value={formData.rol_id}
                 onChange={handleChange}
               >
-                <option value="1">Administrador</option>
-                <option value="2">Organizador</option>
-                <option value="3">Cliente</option>
+                <option value="2">Usuario</option>
+                <option value="3">Organizador</option>
               </select>
             </div>
           </div>
-          {formData.rol_id === "2" && (
+          {formData.rol_id === "3" && (
             <>
               <div className="form-group wide-input">
                 <input
