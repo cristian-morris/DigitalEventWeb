@@ -10,7 +10,10 @@ const Register = () => {
     contrasena: "",
     telefono: "",
     last_name: "",
-    rol_id: "2", // Default to 'User'
+    rol_id: "3", // Default to 'Cliente'
+    curp: "",
+    empresa: "",
+    rfc: "",
   });
 
   const handleChange = (e) => {
@@ -23,18 +26,28 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Verificar si algún campo está vacío
-    const { nombre, email, contrasena, telefono, last_name } = formData;
-    if (!nombre || !email || !contrasena || !telefono || !last_name) {
+    const { nombre, email, contrasena, telefono, last_name, rol_id, curp, empresa, rfc } = formData;
+    
+    // Validación según el rol
+    if (!nombre || !email || !contrasena || !telefono || !last_name || 
+        (rol_id === "2" && (!curp || !empresa || !rfc))) {
       swal("Error", "Por favor, rellena todos los campos.", "error");
       return;
     }
 
     try {
-      await registerUser(formData);
+      await registerUser({ nombre, email, contrasena, telefono, last_name, rol_id });
+      
+      // Guardar los datos adicionales en localStorage si es Organizador
+      if (rol_id === "2") {
+        localStorage.setItem("curp", curp);
+        localStorage.setItem("empresa", empresa);
+        localStorage.setItem("rfc", rfc);
+      }
+
       swal("Registro exitoso", "Tu cuenta ha sido creada con éxito", "success")
         .then(() => {
-          window.location.href = "/login"; // Redirect to login after registration
+          window.location.href = "/login"; // Redirigir a login después del registro
         });
     } catch (error) {
       console.error("Error al registrarse", error);
@@ -102,11 +115,40 @@ const Register = () => {
                 value={formData.rol_id}
                 onChange={handleChange}
               >
-                <option value="2">Usuario</option>
-                <option value="3">Organizador</option>
+                <option value="1">Administrador</option>
+                <option value="2">Organizador</option>
+                <option value="3">Cliente</option>
               </select>
             </div>
           </div>
+          {formData.rol_id === "2" && (
+            <>
+              <div className="form-group wide-input">
+                <input
+                  name="curp"
+                  value={formData.curp}
+                  onChange={handleChange}
+                  placeholder="CURP"
+                />
+              </div>
+              <div className="form-group wide-input">
+                <input
+                  name="empresa"
+                  value={formData.empresa}
+                  onChange={handleChange}
+                  placeholder="Empresa"
+                />
+              </div>
+              <div className="form-group wide-input">
+                <input
+                  name="rfc"
+                  value={formData.rfc}
+                  onChange={handleChange}
+                  placeholder="RFC"
+                />
+              </div>
+            </>
+          )}
           <div className="form-group">
             <button type="submit">Registrar</button>
           </div>
